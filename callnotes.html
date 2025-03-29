@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frontdoor Pro Support - Call Form</title>
+  <style>
+    body {
+      font-family: Calibri, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    .banner {
+      background-color: #003b5d;
+      color: #83a5af;
+      text-align: center;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 50px;
+      line-height: 50px;
+      z-index: 10;
+    }
+    .sidebar {
+      background-color: #002a44;
+      color: #83a5af;
+      width: 60px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 70px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 10;
+    }
+    .sidebar-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      margin: 20px 0;
+      position: relative;
+      padding: 5px;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sidebar-button:hover .tooltip {
+      display: block;
+    }
+    .tooltip {
+      display: none;
+      position: absolute;
+      left: 50px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin-top: 70px;
+      margin-left: 80px;
+      padding: 16px;
+    }
+    .left-section, .right-section {
+      width: 48%;
+    }
+    .right-section {
+      display: none;
+    }
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      width: 120px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: Calibri, sans-serif;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #003b5d;
+      box-shadow: 0 0 5px #003b5d;
+    }
+    button {
+      background-color: #003b5d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005482;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .compendium-item {
+      padding: 5px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    .compendium-item p {
+      margin: 0;
+    }
+    #search-input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: Calibri, sans-serif;
+      outline: none;
+      width: 100%;
+    }
+    #search-input:focus {
+      border-color: #003b5d;
+      box-shadow: 0 0 5px #003b5d;
+    }
+    .tasks-section {
+      margin-top: 20px;
+    }
+    .task-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .task-row-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-right: 10px;
+    }
+    .task-row-item:last-child {
+      margin-right: 0;
+    }
+    .task-row-item input {
+      height: 30px;
+      width: 100%;
+    }
+    .add-button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        width: calc(100% - 80px);
+      }
+      .left-section, .right-section {
+        width: 100%;
+      }
+      .right-section {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">Frontdoor Pro Support - Call Form</div>
+  <div class="sidebar">
+    <button class="sidebar-button" onclick="showSection('templates')">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <line x1="10" y1="9" x2="8" y2="9"></line>
+      </svg>
+      <span class="tooltip">Templates for Notes</span>
+    </button>
+    <button class="sidebar-button" onclick="showSection('compendium')">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+      </svg>
+      <span class="tooltip">Compendium</span>
+    </button>
+    <a href="https://docs.google.com/spreadsheets/d/16qYVVPSAR0LKBAsyJ_aHmesDnqRTCKKI/edit?gid=415346950#gid=415346950" 
+       class="sidebar-button" target="_blank" rel="noopener noreferrer">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+      </svg>
+      <span class="tooltip">Plumber Cost Checker</span>
+    </a>
+  </div>
+  <div class="container">
+    <div class="left-section">
+      <div class="button-group">
+        <p><strong>Greeting</strong></p>
+      </div>
+      <form id="call-form">
+        <p>Thank you for calling Frontdoor Pro Support, installation partner for Moen Flo.</p>
+        <p>My name is Adrian, how can I help you?</p>
+        <div class="form-group">
+          <label for="caller">Caller:</label>
+          <input type="text" id="caller" name="caller">
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason to call/Notes:</label>
+          <textarea id="reason" name="reason" style="height: 100px;"></textarea>
+        </div>
+        <button type="button" onclick="clearFields()">Clear</button>
+
+        <!-- My Tasks Section -->
+        <div class="tasks-section">
+          <p><strong>My Tasks</strong></p>
+          <div id="task-rows">
+            <div class="task-row">
+              <div class="task-row-item">
+                <label>WO</label>
+                <input type="text">
+              </div>
+              <div class="task-row-item">
+                <label>Reason for FU</label>
+                <input type="text">
+              </div>
+              <div class="task-row-item">
+                <label>Comments</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          <button type="button" onclick="addTaskRow()" class="add-button">
+            <svg class="icon" style="width: 16px; height: 16px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Row
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div id="templates-section" class="right-section">
+      <h3>Templates for Notes</h3>
+      <ul>
+        <li>[Dispatcher] called to request the estimate to be sent to the client to be approved. Estimate sent for approval to client only.</li>
+        <li>[Dispatcher] called to request for FITF to be invoiced.</li>
+        <li>[Dispatcher] called to request a follow-up appt to be scheduled.</li>
+        <li>[Dispatcher] called to request the estimate to be sent to the client to be approved and to request for FITF to be invoiced. Estimate sent for approval to client only.</li>
+        <li>[Dispatcher] called requesting assistance in contacting the customer, as they were already on-site. We reached out to the customer and were able to get in touch, successfully requesting them to open the door.</li>
+      </ul>
+    </div>
+
+    <div id="compendium-section" class="right-section">
+      <h3>Search Compendium</h3>
+      <div class="form-group">
+        <label for="search-input">Search:</label>
+        <input type="text" id="search-input" placeholder="Search..." oninput="searchCompendium()">
+      </div>
+      <div id="compendium-list" style="display: none; margin-top: 20px;">
+        <!-- Compendium items will be added here dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Compendium data
+    const compendiumItems = [
+      {
+        title: "Types of Installation",
+        content: [
+          "Standard - 3/4\" & 1\" ---- Straight installation --- New payout from $200 to -$250",
+          "Standard Large - 1 1/4\" & 1 1/2\" -- Still a straight installation -- New payout from $200 to -$275",
+          "Premium Loop - 3/4\" & 1\" -- Payout before for the regular loop was $250 -- Now $300",
+          "Premium Loop Large - 1 1/4\" & 1 1/2\" --- this was $300 before - Now $375 --"
+        ]
+      },
+      {
+        title: "Leaving VM",
+        content: [
+          "Good morning, [Name], this is Adrian with Frontdoor Pro, installation partner for Moen Flo. [Reason for the call]",
+          "Feel free to call us back with any updates at (888) 826-8073 Thanks!",
+          "VM Process",
+          "- Leave VM",
+          "- Open Text Request and send a message to the customer"
+        ]
+      },
+      {
+        title: "MOEN Customer Service",
+        content: ["(844) 633-8356 MOEN Customer Service"]
+      },
+      {
+        title: "Front Door Address",
+        content: [
+          "Frontdoor, Inc.",
+          "3400 Players Club Parkway",
+          "Suite 300",
+          "Memphis, TN 38125"
+        ]
+      },
+      {
+        title: "Troubleshooting Android/iOS",
+        content: [
+          "Android Clear Cache",
+          "- Go To Settings And Select Apps",
+          "- Select The Frontdoor App",
+          "- Select Storage",
+          "- Tap Clear Data & Cache",
+          "- Re-Open The App",
+          "",
+          "iPhone Clear Cache",
+          "- Go to Settings.",
+          "- Go to General.",
+          "- Now click on iPhone Storage.",
+          "- Click on the Frontdoor App to empty its cache.",
+          "- Click on Offload app and confirm the action."
+        ]
+      },
+      {
+        title: "Certificate",
+        content: [
+          "Log in to the Flo by Moen user portal at www.user.meetflo.com",
+          "Go to the Location Settings",
+          "Download the free Insurance Verification Letter",
+          "They can also find the free Insurance Verification Letter in the Location Settings of the Flo by Moen App",
+          "We can also transfer them to (844) 633-8356 (Moen CS line)"
+        ]
+      }
+    ];
+
+    // Function to clear form fields
+    function clearFields() {
+      document.getElementById("caller").value = "";
+      document.getElementById("reason").value = "";
+    }
+
+    // Function to show a specific section
+    function showSection(sectionId) {
+      const sections = ['templates-section', 'compendium-section'];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const targetSection = document.getElementById(sectionId + '-section');
+      if (targetSection) {
+        targetSection.style.display = targetSection.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+
+    // Function to search the compendium
+    function searchCompendium() {
+      const searchTerm = document.getElementById("search-input").value.toLowerCase();
+      const compendiumList = document.getElementById("compendium-list");
+      
+      // Clear previous results
+      compendiumList.innerHTML = '';
+      
+      if (searchTerm === "") {
+        compendiumList.style.display = "none";
+        return;
+      }
+
+      let matchFound = false;
+
+      compendiumItems.forEach(item => {
+        const titleMatch = item.title.toLowerCase().includes(searchTerm);
+        const contentMatch = item.content.some(line => 
+          line.toLowerCase().includes(searchTerm)
+        );
+        
+        if (titleMatch || contentMatch) {
+          matchFound = true;
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'compendium-item';
+          
+          const titleP = document.createElement('p');
+          titleP.innerHTML = `<strong>${item.title}</strong>`;
+          itemDiv.appendChild(titleP);
+          
+          item.content.forEach(line => {
+            const lineP = document.createElement('p');
+            lineP.textContent = line;
+            itemDiv.appendChild(lineP);
+          });
+          
+          compendiumList.appendChild(itemDiv);
+        }
+      });
+
+      compendiumList.style.display = matchFound ? "block" : "none";
+    }
+
+    // Function to add a new task row
+    function addTaskRow() {
+      const container = document.getElementById("task-rows");
+      const row = document.createElement("div");
+      row.className = "task-row";
+      row.innerHTML = `
+        <div class="task-row-item">
+          <label>WO</label>
+          <input type="text">
+        </div>
+        <div class="task-row-item">
+          <label>Reason for FU</label>
+          <input type="text">
+        </div>
+        <div class="task-row-item">
+          <label>Comments</label>
+          <input type="text">
+        </div>
+      `;
+      container.appendChild(row);
+    }
+  </script>
+</body>
+</html>
